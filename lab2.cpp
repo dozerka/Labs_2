@@ -3,40 +3,20 @@
 
 using namespace std;
 
-Data::Data() : size(10), count(0), firstElem(NULL) { }
-Data::Data(int maxsize) : size(maxsize), count(0), firstElem(NULL) { }
-Data::Data(const Data& item) : size(item.size), count(0), firstElem(NULL) {
-    Elem *temp = item.firstElem;
-    while (temp) {
-        this->addElem(temp->value);
-        temp = temp->next;
-    }
-}
-Data::~Data() {
-    Elem *temp = firstElem;
-    Elem *temp2 = NULL;
-    while (temp){
-        temp2 = temp->next;
-        delete temp;
-        temp = temp2;
-    }
-    count = 0;
-}
-
 void Data::addElem(int item) {
     if (count != size) {
-        Elem *needElement = new Elem();
-        needElement->value = item;
-        needElement->next = NULL;
+        Struct *elem = new Struct();
+        elem->value = item;
+        elem->next = NULL;
         if (firstElem != NULL) {
-            Elem *lastelem = firstElem;
-            while (lastelem->next != NULL) {
-                lastelem = lastelem->next;
+            Struct *lastElem = firstElem;
+            while (lastElem->next != NULL) {
+                lastElem = lastElem->next;
             }
-            lastelem->next = needElement;
+            lastElem->next = elem;
             count++;
         } else {
-            firstElem = needElement;
+            firstElem = elem;
             count++;
         }
     } else cout << "List is full" << endl;
@@ -46,7 +26,7 @@ void Data::getElem() {
     if (firstElem == NULL) cout << "List is empty" << endl;
     else {
         cout << "List: ";
-        Elem *temp = firstElem;
+        Struct *temp = firstElem;
         while (temp != NULL) {
             cout << temp->value << "; ";
             temp = temp->next;
@@ -56,40 +36,47 @@ void Data::getElem() {
 }
 
 void Data::getMax(){
-    cout << "MaxSize=" << size << endl;
+    cout << "Max size: " << size << endl;
 }
 
 void Stack::push(int item) {
     if (count != size) {
-        Elem *needElem = new Elem();
-        needElem->value = item;
-        needElem->next = firstElem;
-        firstElem = needElem;
+        Struct *elem = new Struct();
+        elem->value = item;
+        elem->next = firstElem;
+        firstElem = elem;
         count++;
     } else {
         cout << "Stack owerflow" << endl;
     }
 }
 
+void Stack::push() {
+        Struct *elem = new Struct();
+        int item;
+        cout << "Enter element of stack: ";
+        item = checkString();
+        elem->value = item;
+        elem->next = firstElem;
+        firstElem = elem;
+        count++;
+}
+
 void Stack::peek() {
-    Elem *n = firstElem;
-    if (n != NULL){
-        cout << "My Stack:";
-        while (n != NULL) {
-            cout << n->value << "; ";
-            n = n->next;
+    Struct *item = firstElem;
+        while (item != NULL) {
+            cout << item->value << " ";
+            item = item->next;
         }
-        cout << endl;
-    } else cout << "Stack is empty" << endl;
 }
 
 void Stack::countOfElem(){
-    cout << "Items in stack=" << count << endl;
+    cout << "Items in stack =" << count << endl;
 }
 
 void Stack::pop() {
     if (firstElem != NULL) {
-        Elem *temp = firstElem;
+        Struct *temp = firstElem;
         temp = firstElem->next;
         delete firstElem;
         count--;
@@ -101,7 +88,7 @@ void Stack::pop() {
 
 void Stack::pop(int item){
     if (firstElem != NULL){
-        Elem *temp = firstElem;
+        Struct *temp = firstElem;
         for (int i = 0; i < item; i++){
             temp = firstElem->next;
             delete firstElem;
@@ -111,33 +98,53 @@ void Stack::pop(int item){
     } else cout << "Stack is empty" << endl;
 }
 
+int Stack::enterElement(int item) {
+    cout << "Enter element of stack:";
+    
+    return item;
+}
+
 void l2() {
     spacer();
     cout << "\nLab #2" << endl;
     spacer();
     
     Stack first;
-    first.push(5);
-    first.push(10);
-    first.push(15);
-    first.push(20);
-    cout << "First stack:" << endl;
+    first.setName();
+    
+    int stackSize, countElements = 0;
+    cout << "Enter size of stack: ";
+    stackSize = checkString();
+    for (int i = 0; i < stackSize; i++) {
+        first.push();
+    }
+    
+    cout << "\n" << first.getName() << " stack: " << endl;
     first.peek();
-    Stack c(first);
-    cout << "Copyed first stack:" << endl;
-    c.peek();
+    Stack second(first);
+    second.setName();
+    cout << "\nCopy " << first.getName() << " stack to " << second.getName() << " stack" << endl;
+    second.peek();
+    cout << "\nPoping 1 element in " << first.getName() << " stack";
     first.pop();
-    cout << "After pop, first stack:" << endl;
+    cout << "\nAfter pop, " << first.getName() << " stack: " << endl;
     first.peek();
-    first.push(5);
-    cout << "Peek first stack:" << endl;
+    
+    int status;
+    cout << "\nDo you want add elements to " << first.getName() << " stack? 1 or 0: ";
+    cin >> status;
+    if (status) {
+        cout << "How much elements you want add: ";
+        countElements = checkString();
+        for (int i = 0; i < countElements; i++) {
+            first.push();
+        }
+    }
+    cout << "\nPeek " << first.getName() << " stack: " << endl;
     first.peek();
-    first.push(55);
-    first.push(60);
-    cout << "B:" << endl;
-    first.peek();
-    cout << "stack c(b):" << endl;
-    c.peek();
+    
+    cout << "\n" << second.getName() << " stack" << endl;
+    second.peek();
     
     cout << "\nThe end." << endl;
     quit();
