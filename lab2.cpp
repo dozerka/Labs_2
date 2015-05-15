@@ -22,6 +22,8 @@ void Data::addElem(int item) {
     } else cout << "List is full" << endl;
 }
 
+
+
 void Data::getElem() {
     if (firstElem == NULL) cout << "List is empty" << endl;
     else {
@@ -60,6 +62,39 @@ void Stack::push() {
         elem->next = firstElem;
         firstElem = elem;
         count++;
+}
+
+Stack& Stack::operator =(const Stack& item) {
+
+    size = item.size;
+    count = 0;
+    firstElem = NULL;
+    
+    int status = item.count;
+    int firstNumber = 0;
+    
+    while (status != 0){
+        
+        Struct *temp = new Struct;
+        temp->value = item.firstElem->value;
+        
+        int secondNumber = status-firstNumber-1;
+        while (secondNumber > 0) {
+            temp = temp->next;
+            secondNumber--;
+        }
+        addElem(temp->value);
+        firstNumber++;
+        status--;
+    }
+    
+    Struct *temp = item.firstElem;
+    
+    while (temp) {
+        this->addElem(temp->value);
+        temp = temp->next;
+    }
+    return *this;
 }
 
 void Stack::peek() {
@@ -140,6 +175,14 @@ void l2() {
             first.push();
         }
     }
+    
+    
+    Stack third;
+    third = first;
+    third.setName();
+    cout << "\nPeek " << third.getName() << " stack: " << endl;
+    third.peek();
+    
     cout << "\nPeek " << first.getName() << " stack: " << endl;
     first.peek();
     

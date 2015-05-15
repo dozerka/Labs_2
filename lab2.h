@@ -7,7 +7,7 @@ class Data {
 private:
     int count;
 protected:
-    int size, n;
+    int size;
     Struct *firstElem;
 public:
     Data() {
@@ -22,24 +22,28 @@ public:
     };
     Data(const Data& item) {
         size = item.size;
-        count = 0;
         firstElem = NULL;
         
-        int h = item.count;
-        int i = 0;
-        while (h != 0){
-            Struct *temp = item.firstElem;
-            int c = item.count-i-1;
-            while (c != 0){
+        int status = item.count;
+        int firstNumber = 0;
+        
+        while (status != 0){
+
+            Struct *temp = new Struct;
+            temp->value = item.firstElem->value;
+          
+            int secondNumber = item.count-firstNumber-1;
+            while (secondNumber != 0) {
                 temp = temp->next;
-                c--;
+                secondNumber--;
             }
             addElem(temp->value);
-            i++;
-            --h;
+            firstNumber++;
+            status--;
         }
         
         Struct *temp = item.firstElem;
+     
         while (temp) {
             this->addElem(temp->value);
             temp = temp->next;
@@ -70,6 +74,7 @@ public:
         count = 0;
     }
     Stack(const Stack &item) : Data(item) {
+        count = item.count;
         size = item.size;
     }
 
@@ -99,4 +104,6 @@ public:
     void pop(int);
     
     int enterElement(int);
+
+    Stack& operator =(const Stack&);
 };
