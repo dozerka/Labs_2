@@ -63,6 +63,8 @@ public:
     void addElem(int);
     void getElem();
     void getMax();
+    
+    Data& operator =(const Data&);
 };
 
 class Stack: public Data {
@@ -105,5 +107,5 @@ public:
     
     int enterElement(int);
 
-    Stack& operator =(const Stack&);
+    
 };

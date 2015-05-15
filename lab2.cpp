@@ -64,11 +64,10 @@ void Stack::push() {
         count++;
 }
 
-Stack& Stack::operator =(const Stack& item) {
+Data& Data::operator =(const Data& item) {
 
     size = item.size;
     count = 0;
-    firstElem = NULL;
     
     int status = item.count;
     int firstNumber = 0;
@@ -87,6 +86,7 @@ Stack& Stack::operator =(const Stack& item) {
         firstNumber++;
         status--;
     }
+    
     
     Struct *temp = item.firstElem;
     
