@@ -167,6 +167,12 @@ void l2() {
     
     Stack first;
     cin >> first;
+    cout << first << endl;
+    
+    Stack second(first);
+    second.setName();
+    cout << second << endl;
+    
 //    first.setName();
 //    
 //    int stackSize;
@@ -175,48 +181,40 @@ void l2() {
 //    for (int i = 0; i < stackSize; i++) {
 //        first.push();
 //    }
-    
-    cout << first << endl;
-    
-    Stack second(first);
-    second.setName();
-    
-    cout << second << endl;
-    
-    /*cout << "\n" << first.getName() << " stack: " << endl;
-    first.peek();
-    Stack second(first);
-    second.setName();
-    cout << "\nCopy " << first.getName() << " stack to " << second.getName() << " stack" << endl;
-    second.peek();
-    cout << "\nPoping 1 element in " << first.getName() << " stack";
-    first.pop();
-    cout << "\nAfter pop, " << first.getName() << " stack: " << endl;
-    first.peek();
-    
-    int status;
-    cout << "\nDo you want add elements to " << first.getName() << " stack? 1 or 0: ";
-    cin >> status;
-    if (status) {
-        cout << "How much elements you want add: ";
-        countElements = checkString();
-        for (int i = 0; i < countElements; i++) {
-            first.push();
-        }
-    }
-    
-    
-    Stack third;
-    third = first;
-    third.setName();
-    cout << "\nPeek " << third.getName() << " stack: " << endl;
-    third.peek();
-    
-    cout << "\nPeek " << first.getName() << " stack: " << endl;
-    first.peek();
-    
-    cout << "\n" << second.getName() << " stack" << endl;
-    second.peek();*/
+//    cout << "\n" << first.getName() << " stack: " << endl;
+//    first.peek();
+//    Stack second(first);
+//    second.setName();
+//    cout << "\nCopy " << first.getName() << " stack to " << second.getName() << " stack" << endl;
+//    second.peek();
+//    cout << "\nPoping 1 element in " << first.getName() << " stack";
+//    first.pop();
+//    cout << "\nAfter pop, " << first.getName() << " stack: " << endl;
+//    first.peek();
+//    
+//    int status;
+//    cout << "\nDo you want add elements to " << first.getName() << " stack? 1 or 0: ";
+//    cin >> status;
+//    if (status) {
+//        cout << "How much elements you want add: ";
+//        countElements = checkString();
+//        for (int i = 0; i < countElements; i++) {
+//            first.push();
+//        }
+//    }
+//    
+//    
+//    Stack third;
+//    third = first;
+//    third.setName();
+//    cout << "\nPeek " << third.getName() << " stack: " << endl;
+//    third.peek();
+//    
+//    cout << "\nPeek " << first.getName() << " stack: " << endl;
+//    first.peek();
+//    
+//    cout << "\n" << second.getName() << " stack" << endl;
+//    second.peek();
     
     cout << "\nThe end." << endl;
     quit();
