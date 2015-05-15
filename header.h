@@ -8,6 +8,5 @@ void l2 (void);
 //Functions in Labs
 void spacer(void);
 int checkString();
-int checkStringInput();
 int quit();
 void next();
