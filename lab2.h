@@ -69,7 +69,7 @@ public:
 
 class Stack: public Data {
 private:
-    int count;
+    int count, stackSize;
     std::string name;
 public:
     Stack() {
@@ -106,6 +106,8 @@ public:
     void pop(int);
     
     int enterElement(int);
-
+    
+    friend std::istream& operator >>(std::istream& s, Stack& a);
+    friend std::ostream& operator <<(std::ostream& s, const Stack& a);
     
 };

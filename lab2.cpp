@@ -22,8 +22,6 @@ void Data::addElem(int item) {
     } else cout << "List is full" << endl;
 }
 
-
-
 void Data::getElem() {
     if (firstElem == NULL) cout << "List is empty" << endl;
     else {
@@ -87,7 +85,6 @@ Data& Data::operator =(const Data& item) {
         status--;
     }
     
-    
     Struct *temp = item.firstElem;
     
     while (temp) {
@@ -139,22 +136,54 @@ int Stack::enterElement(int item) {
     return item;
 }
 
+ostream& operator <<(std::ostream& output, const Stack& item) {
+    output  << "count = " << item.count << endl
+            << "name = "  << item.name << endl;
+    Struct *item2 = item.firstElem;
+    while (item2 != NULL) {
+        output << item2->value << " ";
+        item2 = item2->next;
+    }
+    
+    return output;
+}
+
+istream& operator >>(std::istream& input, Stack& item) {
+    cout << "Enter name: ";
+    input >> item.name;
+    cout << "Enter size: ";
+    input >> item.stackSize;
+    for (int i = 0; i < item.stackSize; i++) {
+        item.push();
+    }
+
+    return input;
+}
+
 void l2() {
     spacer();
     cout << "\nLab #2" << endl;
     spacer();
     
     Stack first;
-    first.setName();
+    cin >> first;
+//    first.setName();
+//    
+//    int stackSize;
+//    cout << "Enter size of stack: ";
+//    stackSize = checkString();
+//    for (int i = 0; i < stackSize; i++) {
+//        first.push();
+//    }
     
-    int stackSize, countElements = 0;
-    cout << "Enter size of stack: ";
-    stackSize = checkString();
-    for (int i = 0; i < stackSize; i++) {
-        first.push();
-    }
+    cout << first << endl;
     
-    cout << "\n" << first.getName() << " stack: " << endl;
+    Stack second(first);
+    second.setName();
+    
+    cout << second << endl;
+    
+    /*cout << "\n" << first.getName() << " stack: " << endl;
     first.peek();
     Stack second(first);
     second.setName();
@@ -187,7 +216,7 @@ void l2() {
     first.peek();
     
     cout << "\n" << second.getName() << " stack" << endl;
-    second.peek();
+    second.peek();*/
     
     cout << "\nThe end." << endl;
     quit();
